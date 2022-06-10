@@ -50,26 +50,28 @@ func main() {
 
     sql := `select * 
               from document 
-             where id = '1234'
+             where code = '1234'
                and tags like '%test%'`
 
-	dsl, _, err := sql2dsl.Convert(sql)
-	if err != nil {
-		panic(err)
-	}
-	
-	fmt.Print(dsl)
+    dsl, _, err := sql2dsl.Convert(sql)
+    if err != nil {
+        panic(err)
+    }
+    
+    fmt.Print(dsl)
 
 }
 ```
+
 will produce :
+
 ```json
 {
   "query": {
     "bool": {
       "must": [{
         "match_phrase": {
-          "id": {
+          "code": {
             "query": "1234"
           }
         }
